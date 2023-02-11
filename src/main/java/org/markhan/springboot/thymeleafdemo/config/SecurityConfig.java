@@ -24,17 +24,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf()
-		.disable().authorizeRequests()
-		.antMatchers("/register**")
-		.permitAll().anyRequest().authenticated()
+		http
+		.authorizeRequests()
+		.antMatchers("/employees/showForm*").hasAnyRole("MANAGER", "ADMIN")
+		.antMatchers("/employees/save*").hasAnyRole("MANAGER", "ADMIN")
+		.antMatchers("/employees/delete").hasRole("ADMIN")
+		.antMatchers("/employees/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
+		.antMatchers("/resources/**").permitAll()
 				.and()
 				.formLogin()
 					.loginPage("/login")
+					.defaultSuccessUrl("/employees/list")
 					.permitAll()
 				.and()
 				.logout().invalidateHttpSession(true)
-				.clearAuthentication(true).permitAll();
+				.clearAuthentication(true).permitAll()
+				.and()
+				.exceptionHandling().accessDeniedPage("/access-denied");
 	}
 	
 	//bcrypt bean definition

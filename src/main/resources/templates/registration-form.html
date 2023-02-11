@@ -45,14 +45,35 @@
 						<div class="form-outline mb-4">
 							<p class="fw-bold">USERNAME</p>
 							<input type="text" th:field="*{username}" placeholder="username (*)"
-								class="form-control" />
+								class="form-control" required />
 						</div>
 
 						<!-- Password -->
 						<div class="form-outline mb-4">
 							<p class="fw-bold">PASSWORD</p>
-							<input type="password" th:field="*{password}" placeholder="password (*)" class="form-control" />
+							<input type="password" th:field="*{password}" placeholder="password (*)" 
+								class="form-control" required />
 						</div>
+						
+						<!-- Role Selection -->
+						<fieldset>
+							<legend class="fw-bold">Choose a role:</legend>
+							<div>
+								<input type="radio" id="employee" value="ROLE_EMPLOYEE" name="role" checked>
+								<label for="employee">Employee</label> 
+							</div> 
+							
+							<div>
+								<input type="radio" id="manager" value="ROLE_MANAGER" name="role">
+								<label for="manager">Manager</label> 
+							</div>
+							
+							<div>
+								<input type="radio" id="admin" value="ROLE_ADMIN" name="role">
+								<label for="admin">Admin</label> 
+							</div>
+						</fieldset>
+						
 						
 						<!-- First Name -->
 						<!-- <div class="form-outline mb-4">
@@ -73,7 +94,7 @@
 						</div> -->
 
 						<!-- Submit button -->
-						<button type="submit" class="btn btn-primary col-12 mb-4">Register</button>
+						<button type="submit" class="btn btn-primary col-12 mt-5 mb-5">Register</button>
 
 					</form>
 					
